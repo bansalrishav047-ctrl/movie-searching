@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+
+body::-webkit-scrollbar{
+  width: 0.7vw;
+}
+
+body::-webkit-scrollbar-track{
+  background: #303030;
+}
+
+body::-webkit-scrollbar-thumb{
+  background: #8B8B8B;
+  border-radius: 04vw;
+}
+
+#movie-fetcher::-webkit-scrollbar{
+  display: none;
+}
