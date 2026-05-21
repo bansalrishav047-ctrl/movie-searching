@@ -60,10 +60,10 @@ const HomeHero = ({ setMovies }) => {
 
 
     return (
-        <div className=' h-[5.3vw]  bg-[#303030] py-6 flex items-center justify-center '>
+        <div className=' h-[5.1vw]  bg-[#303030] py-6 flex items-center justify-center '>
             <form
                 action="submit"
-                className='flex gap-6 items-center justify-center mt-5'
+                className='flex gap-6 items-center justify-center mt-4'
                 onSubmit={(e) => {
                     Submithandler(e)
                 }}

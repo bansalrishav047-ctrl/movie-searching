@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 const Navbar = () => {
 
   return (
-    <div className='z-99 h-[3.4vw] w-full bg-black py-2 px-4 text-[#7370DA] flex items-center justify-between '>
+    <div className=' h-[3.4vw] w-full bg-black py-2 px-4 text-[#7370DA] flex items-center justify-between '>
         <div onClick={() => window.location.reload()} className='text-xl'>
-            <h1>Movie App</h1>
+            <button>Movie App</button>
         </div>
         <div className='flex gap-7 text-lg pr-6'>
             <div className='underline'>

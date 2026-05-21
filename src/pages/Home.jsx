@@ -11,7 +11,10 @@ const Home = () => {
 
     return (
         <div>
-            <Navbar />
+            <div className='sticky top-0 z-50 bg-black'>
+                <Navbar />
+            </div>
+
             <HomeHero setMovies={setMovies} page={page} setPage={setPage} />
             <HomeMovie movies={movies} setMovies={setMovies} page={page} setPage={setPage} />
   
