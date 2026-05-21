@@ -131,10 +131,10 @@ const HomeMovie = ({ movies, setMovies, page, setPage }) => {
                                                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                                                 alt={movie.title}
                                             />
-                                            <div className='absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-end items-start p-[0.1vw]'>
+                                            <div className='absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex justify-end items-start p-[0.2vw]'>
                                                 <button
                                                     onClick={() => toggleLike(movie)}
-                                                    className='text-4xl'
+                                                    className='text-2xl'
                                                 >
                                                     {
                                                         likedMovies.some(

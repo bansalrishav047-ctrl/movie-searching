@@ -31,7 +31,11 @@ const HomeHero = ({ setMovies }) => {
     function Submithandler(e) {
         e.preventDefault()
 
-        searchMovies(input)
+        if (input === '') {
+            fetchMovie()
+        }
+        else
+            searchMovies(input)
     }
 
     useEffect(() => {
