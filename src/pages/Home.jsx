@@ -8,6 +8,7 @@ import { useState } from 'react'
 const Home = () => {
     const [movies, setMovies] = useState([])
     const [page, setPage] = useState(1)
+    const [debouncedQuery, setDebouncedQuery] = useState('')
 
     return (
         <div>
@@ -15,8 +16,8 @@ const Home = () => {
                 <Navbar />
             </div>
 
-            <HomeHero setMovies={setMovies} page={page} setPage={setPage} />
-            <HomeMovie movies={movies} setMovies={setMovies} page={page} setPage={setPage} />
+            <HomeHero setMovies={setMovies} page={page} setPage={setPage} debouncedQuery={debouncedQuery} setDebouncedQuery={setDebouncedQuery} />
+            <HomeMovie movies={movies} setMovies={setMovies} page={page} setPage={setPage} searchQuery={debouncedQuery} />
   
         </div>
     )

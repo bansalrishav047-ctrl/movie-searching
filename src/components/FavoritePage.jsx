@@ -35,7 +35,7 @@ const FavoritePage = () => {
   return (
     <div className='min-h-screen w-full bg-[#303030] flex flex-col gap-0'>
         <div className='p-7 flex items-center justify-center text-white font-semibold text-2xl '>
-            <h1>Your Favorite Page</h1>
+            <h1>Your Favorite Movies</h1>
         </div>
 
          <div className='min-h-full bg-[#303030] px-12 py-6 flex flex-wrap overflow-y-auto gap-7  justify-start items-center '>

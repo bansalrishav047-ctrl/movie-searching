@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-const HomeHero = ({ setMovies }) => {
+const HomeHero = ({ setMovies, debouncedQuery, setDebouncedQuery }) => {
 
     const [input, setInput] = useState('')
-
 
     const API_KEY = import.meta.env.VITE_TMBD_API_KEY
 
@@ -12,9 +11,9 @@ const HomeHero = ({ setMovies }) => {
 
         try {
 
-            const response = await axios.get(
-                `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${input}`
-            )
+            const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${input}`, {
+                timeout: 10000
+            })
 
             setMovies(response.data.results)
 
@@ -22,30 +21,6 @@ const HomeHero = ({ setMovies }) => {
             console.error('Error in searching movies', error)
         }
     }
-
-
-    function inputHandler(e) {
-        setInput(e.target.value)
-    }
-
-    function Submithandler(e) {
-        e.preventDefault()
-
-        if (input === '') {
-            fetchMovie()
-        }
-        else
-            searchMovies(input)
-    }
-
-    useEffect(() => {
-        if (input === '') {
-            fetchMovie()
-        }
-        else
-            searchMovies(input)
-    }, [input])
-
 
     const fetchMovie = async () => {
         try {
@@ -57,6 +32,34 @@ const HomeHero = ({ setMovies }) => {
             console.error('Error in fetching movies', error)
         }
     }
+
+
+    function inputHandler(e) {
+        setInput(e.target.value)
+    }
+
+    function Submithandler(e) {
+        e.preventDefault()
+
+    }
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedQuery(input);
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, [input]);
+
+    useEffect(() => {
+        if (debouncedQuery.trim() === '') {
+            fetchMovie()
+        }
+        else
+            if (debouncedQuery) {
+                searchMovies(debouncedQuery);
+            } 
+    }, [debouncedQuery])
 
 
     return (
@@ -77,7 +80,7 @@ const HomeHero = ({ setMovies }) => {
                     type="text"
                     placeholder='Search for movies...'
                 />
-                <button
+                <button type='submit'
                     className='p-3 h-[3vw] text-lg font-semibold bg-red-600 text-white rounded-sm flex items-center justify-center cursor-pointer active:scale-95'>
                     Search
                 </button>

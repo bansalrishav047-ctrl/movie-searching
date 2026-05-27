@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useSearchParams } from 'react-router-dom'
 
-const HomeMovie = ({ movies, setMovies, page, setPage }) => {
+const HomeMovie = ({ movies, setMovies, page, setPage, searchQuery }) => {
 
     const API_KEY = import.meta.env.VITE_TMBD_API_KEY
 
@@ -36,7 +35,7 @@ const HomeMovie = ({ movies, setMovies, page, setPage }) => {
 
 
     useEffect(() => {
-        if (page >1) fetchMovie(page)
+        if (page >1 && !searchQuery) fetchMovie(page)
     }, [page])
 
     useEffect(() => {
@@ -79,7 +78,7 @@ const HomeMovie = ({ movies, setMovies, page, setPage }) => {
 
         const timer = setTimeout(() => {
             setShowNoResults(true)
-        }, 2000)
+        }, 3000)
 
         return () => clearTimeout(timer)
 
@@ -124,9 +123,10 @@ const HomeMovie = ({ movies, setMovies, page, setPage }) => {
                         {
                             movies.map((movie, index) => {
                                 return (
-                                    <div key={`${movie.id}-${index}`} id='movie-fetcher' className='bg-[#262626] h-[28vw] w-[17vw] rounded-xl shrink-0 overflow-y-auto'>
+                                    <div key={`${movie.id}-${index}`} id='movie-fetcher' className='bg-[#262626] h-[28vw] w-[17vw] rounded-xl shrink-0 overflow-hidden transition duration-300 hover:scale-105'>
                                         <div className='h-[77%] w-full rounded-xl relative group overflow-hidden'>
                                             <img
+                                                loading='lazy'
                                                 className='h-full w-full object-cover rounded-t-xl'
                                                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                                                 alt={movie.title}
@@ -161,7 +161,7 @@ const HomeMovie = ({ movies, setMovies, page, setPage }) => {
                     <div className='h-[20%] w-full  bg-[#303030] py-6 flex items-center justify-center mb-53'>
                         {showNoResults
                             ? <h1 className='text-white font-bold text-3xl'>No results found...</h1>
-                            : <h1 className='text-white font-bold text-3xl'>Loading...</h1>
+                            : <div className="animate-spin rounded-full h-10 w-10 border-b-3 border-white"></div>
                         }
                     </div>
 
